@@ -21,7 +21,9 @@
             android:label="@string/title_activity_main2" />
         <activity
             android:name=".ChatApp.ChatActivity"
-            android:label="@string/title_activity_chat"></activity>
+            android:label="@string/title_activity_chat" />
+        <activity android:name=".ChatApp.ChatAppSignIn" />
+        <activity android:name=".ChatApp.SplashActivity"></activity>
     </application>
 
 </manifest>

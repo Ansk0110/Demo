@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -47,8 +49,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:11.8.0'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
 
-    kotlin{
-        experimental{
+    kotlin {
+        experimental {
             coroutines "enable"
         }
     }

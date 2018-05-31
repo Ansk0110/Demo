@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'com.google.gms.google-services'
+
 
 android {
     compileSdkVersion 27
@@ -44,10 +44,12 @@ dependencies {
     implementation "org.jetbrains.anko:anko-coroutines:$anko_version"
 
     //Firebase
-    implementation 'com.google.firebase:firebase-core:11.8.0'
-    implementation 'com.google.firebase:firebase-firestore:11.8.0'
-    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+    implementation 'com.google.firebase:firebase-firestore:17.0.1'
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
+
+    apply plugin: 'com.google.gms.google-services'
 
     kotlin {
         experimental {

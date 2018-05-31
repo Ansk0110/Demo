@@ -57,7 +57,7 @@ class ChatAppSignIn : AppCompatActivity() {
                     ErrorCodes.NO_NETWORK ->
                             longSnackbar(signin_layout,"No network")
                     ErrorCodes.UNKNOWN_ERROR ->
-                        longSnackbar(signin_layout,"Unknown Error")
+                        longSnackbar(signin_layout,"Unknown Error ")
                 }
             }
         }

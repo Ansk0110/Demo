@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.omniwyse.myapplication.R
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
@@ -29,19 +30,23 @@ class ChatAppSignIn : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_app_sign_in)
 
+
         account_sign_in.setOnClickListener {
+
             val intent = AuthUI.getInstance().createSignInIntentBuilder()
                     .setAvailableProviders(signInProviders)
                     .setLogo(R.drawable.ic_chat)
                     .build()
 
             startActivityForResult(intent,Rc_signIn)
+
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.i("Abhi","Button Clicked1")
         super.onActivityResult(requestCode, resultCode, data)
-
+        Log.i("Abhi","Button Clicked")
         if(requestCode == Rc_signIn){
             val response = IdpResponse.fromResultIntent(data)
 
@@ -61,5 +66,6 @@ class ChatAppSignIn : AppCompatActivity() {
                 }
             }
         }
+
     }
 }

@@ -49,8 +49,15 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
+    implementation 'com.firebaseui:firebase-ui-storage:3.2.2'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    kapt 'com.github.bumptech.glide:compiler:4.6.1'
 
     apply plugin: 'com.google.gms.google-services'
+    //kotlin annotation processor
+    apply plugin: 'kotlin-kapt'
 
     kotlin {
         experimental {

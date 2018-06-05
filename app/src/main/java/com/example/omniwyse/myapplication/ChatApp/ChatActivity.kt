@@ -1,5 +1,6 @@
 package com.example.omniwyse.myapplication.ChatApp
 
+import android.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
@@ -26,6 +27,13 @@ class ChatActivity : AppCompatActivity() {
                     false
                 }
             }
+        }
+    }
+
+    private  fun replaceFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_layout, fragment)
+            commit()
         }
     }
 }

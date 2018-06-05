@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.omniwyse.myapplication.R
+import com.example.omniwyse.myapplication.Util.FirestoreUtil
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
@@ -44,14 +45,16 @@ class ChatAppSignIn : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.i("Abhi","Button Clicked1")
         super.onActivityResult(requestCode, resultCode, data)
-        Log.i("Abhi","Button Clicked")
         if(requestCode == Rc_signIn){
             val response = IdpResponse.fromResultIntent(data)
 
             if(resultCode == Activity.RESULT_OK){
                 val progressDailog = indeterminateProgressDialog("Setting up your account")
+                FirestoreUtil.initCurrentUserIfFirstTime {
+                    startActivity(intentFor<ChatActivity>().newTask().clearTask())
+                    progressDailog.dismiss()
+                }
                 startActivity(intentFor<ChatActivity>().newTask().clearTask())
                 progressDailog.dismiss()
             }

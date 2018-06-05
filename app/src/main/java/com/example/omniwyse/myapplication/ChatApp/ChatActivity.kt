@@ -1,9 +1,11 @@
 package com.example.omniwyse.myapplication.ChatApp
 
-import android.app.Fragment
+import android.annotation.SuppressLint
+import android.support.v4.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import com.example.omniwyse.myapplication.Fragment.MyAccount
 import com.example.omniwyse.myapplication.R
 import kotlinx.android.synthetic.main.activity_chat.*
 
@@ -21,6 +23,7 @@ class ChatActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_myaccount ->{
+                    replaceFragment(MyAccount())
                     true
                 }
                 else -> {
@@ -30,6 +33,7 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("CommitTransaction")
     private  fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_layout, fragment)

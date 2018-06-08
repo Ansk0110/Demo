@@ -7,15 +7,20 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.omniwyse.myapplication.AppConstants
+import com.example.omniwyse.myapplication.ChatScreenActivity
 
 import com.example.omniwyse.myapplication.R
 import com.example.omniwyse.myapplication.Util.FirestoreUtil
+import com.example.omniwyse.myapplication.recyclerview.item.PersonItem
 import com.google.firebase.firestore.ListenerRegistration
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_people.*
 import com.xwray.groupie.kotlinandroidextensions.Item
+import org.jetbrains.anko.support.v4.startActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,14 +58,13 @@ class PeopleFragment : Fragment() {
                 adapter = GroupAdapter<ViewHolder>().apply {
                     peopleSection = Section(items)
                     add(peopleSection)
+                    setOnItemClickListener(onItemClick)
                 }
             }
             shouldInitRecyclerView = false
         }
 
-        fun updateItems(){
-
-        }
+        fun updateItems() = peopleSection.update(items)
 
         if(shouldInitRecyclerView)
             init()
@@ -69,5 +73,13 @@ class PeopleFragment : Fragment() {
 
     }
 
+    private val onItemClick = OnItemClickListener { item, view ->
+        if(item is PersonItem){
+            startActivity<ChatScreenActivity>(
+                    AppConstants.USER_NAME to item.person.name,
+                    AppConstants.USER_ID to item.userId
+            )
+        }
+    }
 
 }

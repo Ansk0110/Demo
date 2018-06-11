@@ -4,6 +4,7 @@ package com.example.omniwyse.myapplication.Util
 import android.content.Context
 import android.util.Log
 import com.example.omniwyse.myapplication.model.*
+import com.example.omniwyse.myapplication.recyclerview.item.ImageMessageItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -26,7 +27,7 @@ object FirestoreUtil {
         currentUserDocRef.get().addOnSuccessListener { documentSnapshot ->
             if(!documentSnapshot.exists()){
                 val newUser = com.example.omniwyse.myapplication.model.User(FirebaseAuth.getInstance().currentUser?.displayName ?: "",
-                                    "",null)
+                                    "",null, mutableListOf())
                 currentUserDocRef.set(newUser).addOnSuccessListener {
                     onComplete()
                 }
@@ -117,7 +118,8 @@ object FirestoreUtil {
                                 items.add(TextMessageItem(it.toObject(TextMessage::class.java)!!,context))
                             }
                             else
-                                TODO("Addd image message ")
+                                items.add(ImageMessageItem(it.toObject(ImageMessage::class.java)!!,context))
+                            return@forEach
 
                         }
                         onListen(items)
@@ -130,5 +132,18 @@ object FirestoreUtil {
                 .collection("messages")
                 .add(message)
     }
+
+    //region FCM
+    fun getFCMREgistrationTokens(onComplete: (tokens: MutableList<String>) -> Unit){
+        currentUserDocRef.get().addOnSuccessListener {
+            val user = it.toObject(User::class.java)!!
+            onComplete(user.registrationTokens)
+        }
+    }
+
+    fun setFCMRegistrationTokens(registrationTokens: MutableList<String>){
+        currentUserDocRef.update(mapOf("registrationTokens" to registrationTokens))
+    }
+    //endregion FCM
 
 }
